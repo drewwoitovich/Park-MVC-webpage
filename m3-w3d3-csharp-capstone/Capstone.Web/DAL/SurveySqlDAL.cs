@@ -44,6 +44,40 @@ namespace Capstone.Web.DAL
             }
             return surveyId;
         }
+
+        public List<Survey> ViewAllSurveys()
+        {
+            List<Survey> allSurveysList = new List<Survey>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(SQL_ViewAllSurveys, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Survey s = new Survey();
+
+                        s.SurveyId = Convert.ToInt32(reader["surveyId"]);
+                        s.ParkCode = Convert.ToString(reader["parkCode"]);
+                        s.State = Convert.ToString(reader["state"]);
+                        s.EmailAddress = Convert.ToString(reader["emailAddress"]);
+                        s.ActivityLevel = Convert.ToString(reader["activityLevel"]);
+
+                        allSurveysList.Add(s);
+                        
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return allSurveysList;
+        }
     }
 }
    
