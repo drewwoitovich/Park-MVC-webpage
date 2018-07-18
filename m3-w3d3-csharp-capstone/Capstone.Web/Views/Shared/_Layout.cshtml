@@ -7,13 +7,23 @@
 </head>
 
 <body>
-    <header>
-        <img style="height: 100px; width: 300px;" src="~/Content/img/logo.png" alt="Logo" />
+    <header class="container">
+        <img src="~/Content/img/logo.png" class="img-responsive img-rounded" style="display:inline" alt="Geek" />
     </header>
-    <nav class="nav">
-            <b>@Html.ActionLink("Home", "Index", "Home", new { @style = "color: black" })
-            @Html.ActionLink("Survey", "Survey", "Home", new { @style = "color: black" })</b>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://localhost:55601/Home">Home</a>
+                <a class="navbar-brand" href="http://localhost:55601/Survey">Survey</a>
+            </div>
+        </div>
     </nav>
+
 
     @RenderBody()
 
