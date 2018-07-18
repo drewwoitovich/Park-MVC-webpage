@@ -1,8 +1,26 @@
-﻿@model Capstone.Web.Models.Park
+﻿@model List<Capstone.Web.Models.Park>
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2 style="padding-left: 50px;">Parks</h2>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        @{string imagePath = item.ParkCode.ToLower() + ".jpg";}
+        <div class="col-lg-5" >
+            <img style="float: left" class="img-rounded img-responsive" src="~/Content/img/parks/@imagePath" alt="Park Image" />
+        </div>
+        <div class="col-lg-7">
+           <b> @Html.ActionLink(item.ParkName, "Details", new { id = item.ParkCode }, new { @style = "color: black; text-decoration: none" })</b>
+
+            @Html.DisplayFor(modelItem => item.ParkDescription)
+        </div>
+    </div>
+    <br />
+    }
+
 

@@ -14,6 +14,11 @@ namespace Capstone.Web.DAL
         private const string SQL_GetAllParkData = "SELECT * FROM park ORDER BY state";
         private const string SQL_GetParkDataByCode = "SELECT * FROM park WHERE parkCode = @parkCode";
 
+        public ParkSqlDAL(string databaseConnectionString)
+        {
+            connectionString = databaseConnectionString;
+        }
+
         public List<Park> GetAllParkData()
         {
             List<Park> allParksList = new List<Park>();

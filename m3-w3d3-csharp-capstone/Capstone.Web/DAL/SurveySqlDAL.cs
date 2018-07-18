@@ -7,7 +7,7 @@ using Capstone.Web.Models;
 
 namespace Capstone.Web.DAL
 {
-    public class SurveySqlDAL
+    public class SurveySqlDAL : ISurveySqlDAL
     {
         private const string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
 
