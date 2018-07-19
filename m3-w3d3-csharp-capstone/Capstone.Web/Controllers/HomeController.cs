@@ -142,9 +142,9 @@ namespace Capstone.Web.Controllers
         public ActionResult SurveyResults()
         {
             SurveySqlDAL dal = new SurveySqlDAL(connectionString);
-            List<Survey> allSurveys = dal.ViewAllSurveys();
+            List<SurveyResults> surveyResults = dal.GetHighestVoteTotal();
 
-            return View("SurveyResults", allSurveys);
+            return View("SurveyResults", surveyResults);
         }
     }
 }

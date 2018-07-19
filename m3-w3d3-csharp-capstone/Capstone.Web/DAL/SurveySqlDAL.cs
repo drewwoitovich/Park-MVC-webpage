@@ -17,8 +17,7 @@ namespace Capstone.Web.DAL
             "@state, @activityLevel); SELECT SCOPE_IDENTITY();";
         private const string SQL_ViewAllSurveys = "SELECT * FROM survey_result";
 
-        private const string SQL_GetSumActivityLevelByPark = @"Select sum(CONVERT(INT, activityLevel))" +
-                                                             "from survey_result as p WHERE parkCode=@parkCode GROUP BY parkCode;";
+        private const string SQL_GetHighestVoteTotal = @"select p.parkName, COUNT(s.parkCode) as number_of_votes from survey_result s join park p on p.parkCode = s.parkCode GROUP BY p.parkName ORDER BY number_of_votes DESC";
 
         public SurveySqlDAL(string databaseConnectionString)
         {
@@ -57,58 +56,67 @@ namespace Capstone.Web.DAL
             }
         }
 
-        public List<Survey> ViewAllSurveys()
-        {
-            List<Survey> allSurveysList = new List<Survey>();
+        //public List<Survey> ViewAllSurveys()
+        //{
+        //    List<Survey> allSurveysList = new List<Survey>();
 
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(connectionString))
+        //        {
+        //            conn.Open();
+        //            SqlCommand cmd = new SqlCommand(SQL_ViewAllSurveys, conn);
+        //            SqlDataReader reader = cmd.ExecuteReader();
+
+        //            while (reader.Read())
+        //            {
+        //                Survey s = new Survey();
+
+        //                s.SurveyId = Convert.ToInt32(reader["surveyId"]);
+        //                s.ParkCode = Convert.ToString(reader["parkCode"]);
+        //                s.State = Convert.ToString(reader["state"]);
+        //                s.EmailAddress = Convert.ToString(reader["emailAddress"]);
+        //                s.ActivityLevel = Convert.ToString(reader["activityLevel"]);
+
+        //                allSurveysList.Add(s);
+
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+        //    return allSurveysList;
+        //}
+
+        public List<SurveyResults> GetHighestVoteTotal()
+        {
+            List<SurveyResults> surveyResultsList = new List<SurveyResults>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(SQL_ViewAllSurveys, conn);
+                    SqlCommand cmd = new SqlCommand(SQL_GetHighestVoteTotal, conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        Survey s = new Survey();
+                        SurveyResults sr = new SurveyResults();
 
-                        s.SurveyId = Convert.ToInt32(reader["surveyId"]);
-                        s.ParkCode = Convert.ToString(reader["parkCode"]);
-                        s.State = Convert.ToString(reader["state"]);
-                        s.EmailAddress = Convert.ToString(reader["emailAddress"]);
-                        s.ActivityLevel = Convert.ToString(reader["activityLevel"]);
+                        sr.ParkName = Convert.ToString(reader["parkName"]);
+                        sr.VoteTotal = Convert.ToInt32(reader["number_of_votes"]);
 
-                        allSurveysList.Add(s);
-
+                        surveyResultsList.Add(sr);
                     }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            return allSurveysList;
-        }
-
-        public string ActivityLevelByPark(string parkCode)
-        {
-            string rate = String.Empty;
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand(SQL_GetSumActivityLevelByPark, conn);
-                    cmd.Parameters.AddWithValue("@parkCode", parkCode);
-                    int value = (int) cmd.ExecuteScalar();
-                    return value.ToString();
                 }
             }
             catch (Exception)
             {
-                return "0".ToString();
+                throw;
             }
+            return surveyResultsList;
         }
     }
 }

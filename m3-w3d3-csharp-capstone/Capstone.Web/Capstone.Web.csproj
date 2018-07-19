@@ -185,6 +185,7 @@
     <Compile Include="Models\Park.cs" />
     <Compile Include="Models\ParkSurvey.cs" />
     <Compile Include="Models\Survey.cs" />
+    <Compile Include="Models\SurveyResults.cs" />
     <Compile Include="Models\Weather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
