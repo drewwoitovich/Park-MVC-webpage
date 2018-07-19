@@ -45,7 +45,7 @@ namespace Capstone.Web.Controllers
                     model = p;
                 }
 
-               
+
             }
             return View("ParkDetails", model);
         }
@@ -67,22 +67,81 @@ namespace Capstone.Web.Controllers
             }
             return RedirectToAction("SurveyResults");
         }
-        
+
         // GET: Weather
         public ActionResult Weather(string id)
         {
-            WeatherSqlDAL dal = new WeatherSqlDAL(connectionString);
-            List<Weather> allWeatherList = dal.GetAllWeather();
-            Weather model = null;
+            IParkSqlDAL dal = new ParkSqlDAL(connectionString);
+            List<Park> ParkList = dal.GetAllParkData();
+            List<Weather> weather = new List<Weather>();
 
-            foreach (Weather w in allWeatherList)
+            foreach (Park park in ParkList)
             {
-                if (id == w.ParkCode)
+                if (id == park.ParkCode)
                 {
-                    model = w;
+                    IWeatherSqDAL thisDal = new WeatherSqlDAL(connectionString);
+                    weather = thisDal.GetWeatherByParkCode(park.ParkCode);
                 }
             }
-            return View("ParkDetails", model);
+
+            bool isFahrenheit;
+            Session["Temperature"] = Request.Params["Temperature"];
+            if (Session["Temperature"].ToString() != null)
+            {
+                if (Session["Temperature"].ToString() == "F")
+                {
+                    isFahrenheit = true;
+                }
+                else
+                {
+                    isFahrenheit = false;
+                }
+            }
+            else
+            {
+                isFahrenheit = true;
+            }
+
+            //Fahrenheit to Celsius
+            for (int i = 0; i < weather.Count; i++)
+            {
+                if (isFahrenheit)
+                {
+                    if (weather[i].Temperature == "F")
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        weather[i].Temperature = "F";
+                        weather[i].High =
+                    }
+                }
+            }
+        }
+
+        public int ConvertFahrenheitToCelsius(double temp, string fahrTempOrCelTemp)
+        {
+            double newTemp = 0.00;
+            if (fahrTempOrCelTemp.ToLower() == "c")
+            {
+                newTemp = ((temp - 32) * 5.0 / 9);
+            }
+            else if (fahrTempOrCelTemp.ToLower() == "f")
+            {
+                newTemp = (temp * (9 / 5.0) + 32);
+            }
+
+            return (int)newTemp;
+        }
+
+        //GET: SurveyResults
+        public ActionResult SurveyResults()
+        {
+            SurveySqlDAL dal = new SurveySqlDAL(connectionString);
+            List<Survey> allSurveys = dal.ViewAllSurveys();
+
+            return View("SurveyResults", allSurveys);
         }
     }
 }
