@@ -9,7 +9,7 @@ namespace Capstone.Web.DAL
 {
     public interface ISurveySqlDAL
     {
-        List<Survey> ViewAllSurveys();
+        List<SurveyResults> GetHighestVoteTotal();
 
         bool InsertSurvey(Survey newSurvey);
     }

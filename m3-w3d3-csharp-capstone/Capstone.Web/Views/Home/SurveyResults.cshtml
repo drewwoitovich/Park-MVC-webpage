@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Capstone.Web.Models.Survey>
+﻿@model List<Capstone.Web.Models.SurveyResults>
 
 @{
     ViewBag.Title = "SurveyResults";
@@ -10,33 +10,20 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ParkCode)
+            Vote Count
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmailAddress)
+            Park Name
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityLevel)
-        </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ParkCode)
+            @Html.DisplayFor(modelItem => item.VoteTotal)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EmailAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityLevel)
+            @Html.DisplayFor(modelItem => item.ParkName)
         </td>
     </tr>
 }
