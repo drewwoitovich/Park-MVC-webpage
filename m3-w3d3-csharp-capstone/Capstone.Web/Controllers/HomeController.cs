@@ -86,20 +86,14 @@ namespace Capstone.Web.Controllers
 
             bool isFahrenheit;
             Session["Temperature"] = Request.Params["Temperature"];
-            if (Session["Temperature"].ToString() != null)
+
+            if (Session["Temperature"].ToString() == "F")
             {
-                if (Session["Temperature"].ToString() == "F")
-                {
-                    isFahrenheit = true;
-                }
-                else
-                {
-                    isFahrenheit = false;
-                }
+                isFahrenheit = true;
             }
             else
             {
-                isFahrenheit = true;
+                isFahrenheit = false;
             }
 
             //Fahrenheit to Celsius
@@ -114,10 +108,19 @@ namespace Capstone.Web.Controllers
                     else
                     {
                         weather[i].Temperature = "F";
-                        weather[i].High =
+                        weather[i].High = ConvertFahrenheitToCelsius(weather[i].High, "F");
+                        weather[i].Low = ConvertFahrenheitToCelsius(weather[i].Low, "F");
                     }
                 }
+                else
+                {
+                    weather[i].Temperature = "C";
+                    weather[i].High = ConvertFahrenheitToCelsius(weather[i].High, "C");
+                    weather[i].Low = ConvertFahrenheitToCelsius(weather[i].Low, "C");
+                }
             }
+
+            return View("Weather", weather);
         }
 
         public int ConvertFahrenheitToCelsius(double temp, string fahrTempOrCelTemp)

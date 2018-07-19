@@ -61,7 +61,7 @@ namespace Capstone.Web.Tests.DAL
         public void SQL_ViewAllSurveys_Tests()
         {
             //Arrange
-            SurveySqlDAL surveyDal = new SurveySqlDAL();
+            SurveySqlDAL surveyDal = new SurveySqlDAL(connectionString);
 
             //Act
             List<Survey> allSurveys = surveyDal.ViewAllSurveys();
@@ -75,7 +75,7 @@ namespace Capstone.Web.Tests.DAL
         [TestMethod]
         public void SQL_InsertSurvey_Tests()
         {
-            SurveySqlDAL surveyDal = new SurveySqlDAL();
+            SurveySqlDAL surveyDal = new SurveySqlDAL(connectionString);
 
             Assert.IsNotNull(surveyDal);
             Assert.AreEqual(1, rowsAffected);
