@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Capstone.Web.Models.Weather>
+
+@{
+    ViewBag.Title = "Weather";
+}
+
+<h2>Weather</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ParkCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FiveDayForecastValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.High)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Low)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Forecast)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Temperature)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParkCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FiveDayForecastValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.High)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Low)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Forecast)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Temperature)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

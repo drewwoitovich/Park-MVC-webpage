@@ -14,6 +14,11 @@ namespace Capstone.Web.DAL
 
         private const string SQL_GetWeatherForPark = "SELECT * FROM weather WHERE parkCode = @parkCode";
 
+        public WeatherSqlDAL(string databaseConnectionString)
+        {
+            connectionString = databaseConnectionString;
+        }
+
         public List<Weather> GetWeatherByParkCode(string parkCode)
         {
 

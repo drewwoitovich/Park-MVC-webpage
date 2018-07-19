@@ -157,6 +157,7 @@
     <Content Include="Views\Home\ParkDetails.cshtml" />
     <Content Include="Views\Home\Survey.cshtml" />
     <Content Include="Views\Home\SurveyResults.cshtml" />
+    <Content Include="Views\Home\Weather.cshtml" />
     <None Include="Views\Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Views\Scripts\bootstrap.js" />
     <Content Include="Views\Scripts\bootstrap.min.js" />

@@ -63,8 +63,27 @@ namespace Capstone.Web.Controllers
             {
                 return View("Survey", model);
             }
-            return RedirectToAction("SurveyResults", "Home");
+            return RedirectToAction("SurveyResults");
         }
         
+        // GET: Weather
+        public ActionResult Weather()
+        {
+            WeatherSqlDAL dal = new WeatherSqlDAL(connectionString);
+            List<Weather> allWeatherList = dal.GetWeatherByParkCode(id);
+            Weather model = null;
+
+            foreach (Weather p in allWeatherList)
+            {
+                if (id == p.ParkCode)
+                {
+                    model = p;
+                }
+
+
+            }
+            return View("ParkDetails", model);
+        }
+
     }
 }
