@@ -34,13 +34,13 @@ namespace Capstone.Web.Tests.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(SQL_InsertSurvey, conn);
-                    cmd.ExecuteNonQuery();
 
-                    cmd = new SqlCommand(SQL_InsertSurvey, conn);
                     cmd.Parameters.AddWithValue("@parkCode", "CVNP");
-                    cmd.Parameters.AddWithValue("@ActivityLevel", "test");
-                    cmd.Parameters.AddWithValue("@EmailAddress", "test");
-                    cmd.Parameters.AddWithValue("@State", "test");
+                    cmd.Parameters.AddWithValue("@emailAddress", "test");
+                    cmd.Parameters.AddWithValue("@state", "test");
+                    cmd.Parameters.AddWithValue("@activityLevel", "test");
+
+
                     rowsAffected = cmd.ExecuteNonQuery();
 
                 }

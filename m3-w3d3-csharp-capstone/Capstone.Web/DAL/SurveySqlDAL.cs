@@ -19,9 +19,8 @@ namespace Capstone.Web.DAL
         private const string SQL_GetSumActivityLevelByPark = @"Select sum(CONVERT(INT, activityLevel))" +
                                                              "from survey_result as p WHERE parkCode=@parkCode GROUP BY parkCode;";
 
-        public int InsertSurvey(string parkCode, string emailAddress, string state, string activityLevel)
+        public Survey InsertSurvey(string parkCode, string emailAddress, string state, string activityLevel)
         {
-            int surveyId;
 
             Survey s = new Survey();
 
@@ -38,14 +37,13 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue("@state", state);
                     cmd.Parameters.AddWithValue("@activityLevel", activityLevel);
 
-                    surveyId = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (Exception e)
             {
                 throw e;
             }
-            return surveyId;
+            return s;
         }
 
         public List<Survey> ViewAllSurveys()
