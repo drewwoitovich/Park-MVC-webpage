@@ -7,30 +7,30 @@
 }
 
 
-
-<div class="row">
-    <div class="col-md-5">
-        @{string imagePath = Model.ParkCode.ToLower() + ".jpg";}
-        <img style="float: left" class="img-rounded img-responsive" src="~/Content/img/parks/@imagePath" alt="Park Image" />
-        <p><q>@Model.InspirationalQuote</q> - @Model.InspirationalQuoteSource</p>
-    </div>
-    <div class="col-md-7">
-        <h3> </h3>
-        <h3>@Model.ParkName</h3>
-        <h4>@Model.State</h4>
-        <p>
-            Founded in @Model.YearFounded.ToString("N"), @Model.ParkName is located in the great stat of @Model.State and has @Model.MilesOfTrail.ToString("N") miles of trails
-            across @Model.Acreage.ToString("N") beutiful acres. <br />
-            @Model.ParkName has a typical @Model.Climate climate and an elevation of @Model.ElevationInFeet feet above sea level. @Model.ParkName is also home to @Model.NumberOfAnimalSpecies different species
-            of critters.<br />
-            You can visit @Model.ParkName for only @Model.EntryFee.ToString("C") and if you would like to stay for awhile, @Model.ParkName has @Model.NumberOfCampsites.ToString("N") campsites.
-        </p>
-        <h4>
-            Please Check the
-            <a href="#">
-                5 Day Forecast
-            </a>
-        </h4>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            @{string imagePath = Model.ParkCode.ToLower() + ".jpg";}
+            <img style="float:inherit" class="img-rounded img-responsive" src="~/Content/img/parks/@imagePath" alt="Park Image" />
+            <p class="text-center" style="font-style: italic"><q>"@Model.InspirationalQuote"<br/></q> - @Model.InspirationalQuoteSource</p>
+        </div>
+        <div class="col-md-7">
+            <h3> </h3>
+            <h3>@Model.ParkName</h3>
+            <h4>@Model.State</h4>
+            <p>
+                Founded in @Model.YearFounded.ToString("D"), @Model.ParkName is located in the great state of @Model.State and has @Model.MilesOfTrail.ToString("D") miles of trails
+                across @Model.Acreage.ToString("N") beutiful acres. @Model.ParkName has a @Model.Climate climate and an elevation of @Model.ElevationInFeet feet above sea level. @Model.ParkName
+                is also home to @Model.NumberOfAnimalSpecies.ToString("D") different species of critters.You can visit @Model.ParkName for
+                only @Model.EntryFee.ToString("C") and if you would like to stay for awhile, @Model.ParkName has @Model.NumberOfCampsites.ToString("D") campsites.
+            </p>
+            <h4>
+                Please Check the
+                <a href="#">
+                    5 Day Forecast
+                </a>
+            </h4>
+        </div>
     </div>
 </div>
 
