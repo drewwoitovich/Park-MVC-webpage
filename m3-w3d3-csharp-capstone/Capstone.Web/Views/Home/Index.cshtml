@@ -1,4 +1,5 @@
-﻿@model List<Capstone.Web.Models.Park>
+﻿@using Capstone.Web.Models;
+@model List<Park>
 
 @{
     ViewBag.Title = "Index";
@@ -19,13 +20,15 @@
         <div class="row">
             @{string imagePath = item.ParkCode.ToLower() + ".jpg";}
             <div class="col-lg-6">
-                <a href="#">
+                <a href='@Url.Action("ParkDetails", "Home", new{id=item.ParkCode})'>
                     <img style="float: left" class="img-rounded img-responsive" src="~/Content/img/parks/@imagePath" alt="Park Image" />
                 </a>
             </div>
             <div class="text-center">
                 <div class="col-lg-6">
+                    <a href='@Url.Action("ParkDetails", "Home", new{id=item.ParkCode})'>
                     <b> @Html.ActionLink(item.ParkName, "Details", new { id = item.ParkCode }, new { @style = "color: black; text-decoration: none" })</b>
+                    </a>
                 </div>
                 <p>@Html.DisplayFor(modelItem => item.ParkDescription)</p>
             </div>

@@ -26,5 +26,23 @@ namespace Capstone.Web.Controllers
 
             return View("Index", allParks);
         }
+
+        public ActionResult ParkDetails(string id)
+        {
+            ParkSqlDAL dal = new ParkSqlDAL(connectionString);
+            List<Park> parkList = dal.GetAllParkData();
+            Park model = null;
+
+            foreach (Park p in parkList)
+            {
+                if (id == p.ParkCode)
+                {
+                    model = p;
+                }
+
+               
+            }
+            return View("ParkDetails", model);
+        }
     }
 }

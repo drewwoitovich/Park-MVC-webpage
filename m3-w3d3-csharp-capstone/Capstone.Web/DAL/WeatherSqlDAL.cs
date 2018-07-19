@@ -9,15 +9,14 @@ namespace Capstone.Web.DAL
 {
     public class WeatherSqlDAL : IWeatherSqDAL
     {
-        private string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
+        public string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
 
         private const string SQL_GetWeatherForPark = "SELECT * FROM weather WHERE parkCode = @parkCode";
 
-        public Weather GetWeatherByParkCode(string parkCode)
+        public List<Weather> GetWeatherByParkCode(string parkCode)
         {
-            Weather w = new Weather();
 
-            string parkCodeWithApostraphes = "'" + parkCode + "'";
+            List<Weather> fiveDayForecast = new List<Weather>();
 
             try
             {
@@ -25,19 +24,22 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(SQL_GetWeatherForPark, conn);
-                    cmd.Parameters.AddWithValue("@parkCode", parkCodeWithApostraphes);
+                    cmd.Parameters.AddWithValue("@parkCode", parkCode);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        w.ParkCode = Convert.ToString(reader["parkCode"]);
+                        Weather w = new Weather();
                         w.FiveDayForecastValue = Convert.ToInt32(reader["fiveDayForecastValue"]);
+                        w.Forecast = Convert.ToString(reader["forecast"]);
                         w.High = Convert.ToInt32(reader["high"]);
                         w.Low = Convert.ToInt32(reader["low"]);
-                        w.Forecast = Convert.ToString(reader["forecast"]);
+                        w.ParkCode = Convert.ToString(reader["parkCode"]);
+                        w.Temperature = "F";
+                        fiveDayForecast.Add(w);
                     }
                 }
-                return w;
+                return fiveDayForecast;
             }
             catch (Exception e)
             {

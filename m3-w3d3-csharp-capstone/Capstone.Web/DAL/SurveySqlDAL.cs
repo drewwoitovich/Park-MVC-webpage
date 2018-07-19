@@ -9,12 +9,15 @@ namespace Capstone.Web.DAL
 {
     public class SurveySqlDAL : ISurveySqlDAL
     {
-        private const string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
+        public string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
 
         private const string SQL_InsertSurvey = "INSERT INTO [dbo].[survey_result] ([parkCode], " +
             "[emailAddress], [state], [activityLevel]) VALUES (@parkCode, @emailAddress, " +
             "@state, @activityLevel)";
         private const string SQL_ViewAllSurveys = "SELECT * FROM survey_result";
+
+        private const string SQL_GetSumActivityLevelByPark = @"Select sum(CONVERT(INT, activityLevel))" +
+                                                             "from survey_result as p WHERE parkCode=@parkCode GROUP BY parkCode;";
 
         public int InsertSurvey(string parkCode, string emailAddress, string state, string activityLevel)
         {
@@ -68,7 +71,7 @@ namespace Capstone.Web.DAL
                         s.ActivityLevel = Convert.ToString(reader["activityLevel"]);
 
                         allSurveysList.Add(s);
-                        
+
                     }
                 }
             }
@@ -78,6 +81,25 @@ namespace Capstone.Web.DAL
             }
             return allSurveysList;
         }
+
+        public string ActivityLevelByPark(string parkCode)
+        {
+            string rate = String.Empty;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(SQL_GetSumActivityLevelByPark, conn);
+                    cmd.Parameters.AddWithValue("@parkCode", parkCode);
+                    int value = (int) cmd.ExecuteScalar();
+                    return value.ToString();
+                }
+            }
+            catch (Exception)
+            {
+                return "0".ToString();
+            }
+        }
     }
 }
-   

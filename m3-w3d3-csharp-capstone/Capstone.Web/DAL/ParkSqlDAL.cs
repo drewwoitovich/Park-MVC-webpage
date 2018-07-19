@@ -63,7 +63,7 @@ namespace Capstone.Web.DAL
         {
             Park p = new Park();
 
-            string parkCodeWithApostraphes = "'" + parkCode + "'";
+            string parkCodeWithApostraphes = parkCode.ToString();
 
             try
             {
