@@ -56,39 +56,39 @@ namespace Capstone.Web.DAL
             }
         }
 
-        //public List<Survey> ViewAllSurveys()
-        //{
-        //    List<Survey> allSurveysList = new List<Survey>();
+        public List<Survey> ViewAllSurveys()
+        {
+            List<Survey> allSurveysList = new List<Survey>();
 
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(connectionString))
-        //        {
-        //            conn.Open();
-        //            SqlCommand cmd = new SqlCommand(SQL_ViewAllSurveys, conn);
-        //            SqlDataReader reader = cmd.ExecuteReader();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(SQL_ViewAllSurveys, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
 
-        //            while (reader.Read())
-        //            {
-        //                Survey s = new Survey();
+                    while (reader.Read())
+                    {
+                        Survey s = new Survey();
 
-        //                s.SurveyId = Convert.ToInt32(reader["surveyId"]);
-        //                s.ParkCode = Convert.ToString(reader["parkCode"]);
-        //                s.State = Convert.ToString(reader["state"]);
-        //                s.EmailAddress = Convert.ToString(reader["emailAddress"]);
-        //                s.ActivityLevel = Convert.ToString(reader["activityLevel"]);
+                        s.SurveyId = Convert.ToInt32(reader["surveyId"]);
+                        s.ParkCode = Convert.ToString(reader["parkCode"]);
+                        s.State = Convert.ToString(reader["state"]);
+                        s.EmailAddress = Convert.ToString(reader["emailAddress"]);
+                        s.ActivityLevel = Convert.ToString(reader["activityLevel"]);
 
-        //                allSurveysList.Add(s);
+                        allSurveysList.Add(s);
 
-        //            }
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
-        //    return allSurveysList;
-        //}
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return allSurveysList;
+        }
 
         public List<SurveyResults> GetHighestVoteTotal()
         {

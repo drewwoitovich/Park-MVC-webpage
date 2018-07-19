@@ -1,61 +1,120 @@
-﻿@model IEnumerable<Capstone.Web.Models.Weather>
+﻿@using System.Diagnostics.Eventing.Reader
+@using Capstone.Web.Models;
+@model List<Weather>
 
 @{
     ViewBag.Title = "Weather";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div style="background-color: azure">
+    <h2 style="font-weight: bold; text-align: center;">5 Day Weather Forecast</h2>
+    @using (Html.BeginForm("Weather", "Home", FormMethod.Get))
+    {
+        <label>
+            <input type="radio" name="Temperature" value="F" checked="checked" /> Fahrenheit
+        </label>
+        <label>
+            <input type="radio" name="Temperature" value="C" />Celsius
+        </label>
+        <br />
+        <input type="submit" name="" value="Change" class="btn-primary" />
+        <br />
+    }
+</div>
 
-<h2>Weather</h2>
+<div class="card; align-content-center">
+    @foreach (Weather w in Model)
+    {
+        if (w.Temperature == "F")
+        {
+            <span>High @w.High Degrees (F)</span>
+            <br />
+            <span>Low @w.Low Degrees (F)</span>
+            <br />
 
+        }
+        else
+        {
+            <span>High @w.High Degrees (C)</span>
+            <br />
+            <span>Low @w.Low Degrees (C)</span>
+            <br />
+        }
+        <p>
+            The forecast for today is:
+            <strong>@w.Forecast.ToUpper()</strong>
+        </p>
+        <br />
+        if (w.Low <= -20)
+        {
+            <div class="alert-info">
+                <p>Frigid temperatures - dress appropriately.</p>
+            </div>
+        }
+        if (w.High > 75)
+        {
+            <div class="alert-info">
+                <p>It's hot, hydrate!</p>
+            </div>
+        }
+        if (w.High - w.Low == 20)
+        {
+            <div class="alert-info">
+                <p>Humid, prepare to be sweaty.</p>
+            </div>
+        }
+        if (w.Forecast == "cloudy")
+        {
+            <div>
+                <img src="~/Content/img/weather/cloudy.png" />
+            </div>
+        }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ParkCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FiveDayForecastValue)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.High)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Low)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Forecast)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Temperature)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ParkCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FiveDayForecastValue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.High)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Low)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Forecast)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Temperature)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
-
-</table>
+        else if (w.Forecast == "partly cloudy")
+        {
+            <div>
+                <img src="~/Content/img/weather/partlyCloudy.png" class="img-responsive" />
+            </div>
+            <div class="alert-info">
+                <p>Enjoy the perfect weather!</p>
+            </div>
+        }
+        else if (w.Forecast == "sunny")
+        {
+            <div>
+                <img src="~/Content/img/weather/sunny.png" class="img-responsive" />
+            </div>
+            <div class="alert-info">
+                <p>Don't forget sunblock!</p>
+            </div>
+        }
+        else if (w.Forecast == "snow")
+        {
+            <div>
+                <img src="~/Content/img/weather/snow.png" class="img-responsive" />
+            </div>
+            <div class="alert-info">
+                <p>Don't forget the your snowshoes!</p>
+            </div>
+        }
+        else if (w.Forecast == "rain")
+        {
+            <div>
+                <img src="~/Content/img/weather/rain.png" class="img-responsive" />
+            </div>
+            <div class="alert-info">
+                <p>Waterproof everything you hold dear.</p>
+            </div>
+        }
+        else if (w.Forecast == "thunderstorms")
+        {
+            <div>
+                <img src="~/Content/img/weather/thunderstorms.png" class="img-responsive" />
+            </div>
+            <div class="alert-info">
+                <p>Avoid exposed ridges, in fact, just don't come at all!</p>
+            </div>
+        }
+    }
+</div>
+<hr/>

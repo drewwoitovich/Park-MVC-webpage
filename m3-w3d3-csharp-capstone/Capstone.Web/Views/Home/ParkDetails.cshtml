@@ -7,31 +7,30 @@
 }
 
 
-
-<div class="container">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-6">
             @{string imagePath = Model.ParkCode.ToLower() + ".jpg";}
             <img style="float:inherit" class="img-rounded img-responsive" src="~/Content/img/parks/@imagePath" alt="Park Image" />
-            <p class="text-center" style="font-style: italic"><q>"@Model.InspirationalQuote"<br/></q> - @Model.InspirationalQuoteSource</p>
+            <p class="text-center" style="font-style: italic"><q>@Model.InspirationalQuote</q><br /> - @Model.InspirationalQuoteSource </p>
         </div>
-        <div class="col-md-7">
+        <div class="col-6">
             <h3> </h3>
             <h3>@Model.ParkName</h3>
             <h4>@Model.State</h4>
             <p>
                 Founded in @Model.YearFounded.ToString("D"), @Model.ParkName is located in the great state of @Model.State and has @Model.MilesOfTrail.ToString("D") miles of trails
                 across @Model.Acreage.ToString("N") beutiful acres. @Model.ParkName has a @Model.Climate climate and an elevation of @Model.ElevationInFeet feet above sea level. @Model.ParkName
-                is also home to @Model.NumberOfAnimalSpecies.ToString("D") different species of critters.You can visit @Model.ParkName for
+                is also home to @Model.NumberOfAnimalSpecies.ToString("D") different species of critters. You can visit @Model.ParkName for
                 only @Model.EntryFee.ToString("C") and if you would like to stay for awhile, @Model.ParkName has @Model.NumberOfCampsites.ToString("D") campsites.
             </p>
             <h4>
                 Please Check the
-                @Html.ActionLink("5 Day Forecast", "Weather");
+                <a href='@Url.Action("Weather", "Home", new { id = Model.ParkCode })'>
+                    5 Day Weather Forecast
+                </a>
             </h4>
         </div>
 
     </div>
-</div>
 
 

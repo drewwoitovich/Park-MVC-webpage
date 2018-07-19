@@ -29,7 +29,6 @@ namespace Capstone.Web.Controllers
 
             return View("Index", allParks);
         }
-        // GET: /Home/ParkDetails/@parkCode
 
         // GET: ParkDetails
         public ActionResult ParkDetails(string id)
@@ -44,8 +43,6 @@ namespace Capstone.Web.Controllers
                 {
                     model = p;
                 }
-
-
             }
             return View("ParkDetails", model);
         }
@@ -84,16 +81,19 @@ namespace Capstone.Web.Controllers
                 }
             }
 
-            bool isFahrenheit;
+            bool isFahrenheit = true;
 
             Session["Temperature"] = Request.Params["Temperature"];
-            if (Session["Temperature"].ToString() == "F")
+            if (Session["Temperature"] != null)
             {
-                isFahrenheit = true;
-            }
-            else
-            {
-                isFahrenheit = false;
+                if (Session["Temperature"].ToString() == "F")
+                {
+                    isFahrenheit = true;
+                }
+                else
+                {
+                    isFahrenheit = false;
+                }
             }
 
             //Fahrenheit to Celsius

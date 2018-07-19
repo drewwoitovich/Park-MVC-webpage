@@ -10,6 +10,20 @@
     new SelectListItem {Text = "Active", Value = "Active"},
     new SelectListItem {Text = "Extremely Active", Value = "Extremely Active"}
     };
+
+    List<SelectListItem> parkCodeList = new List<SelectListItem>
+    {
+        new SelectListItem {Text = "Cuyahoga Valley National Park", Value = "CVNP"},
+        new SelectListItem {Text = "Everglades National Park", Value = "ENP"},
+        new SelectListItem {Text = "Grand Canyon National Park", Value = "GCNP"},
+        new SelectListItem {Text = "Glacier National Park", Value = "GNP"},
+        new SelectListItem {Text = "Great Smoky Mountain National Park", Value = "GSMNP"},
+        new SelectListItem {Text = "Grand Teton National Park", Value = "GTNP"},
+        new SelectListItem {Text = "Mount Rainier National Park", Value = "MRNP"},
+        new SelectListItem {Text = "Rocky Mountain National Park", Value = "RMNP"},
+        new SelectListItem {Text = "Yellow National Park", Value = "YNP"},
+        new SelectListItem {Text = "Yosemite National Park", Value = "YNP2"},
+    };
 }
 
 <h2>Survey</h2>
@@ -27,7 +41,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ParkCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ParkCode, new { htmlAttributes = new { @class = "form-control" } })
+
+                @Html.DropDownListFor(model => model.ParkCode, parkCodeList,  new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ParkCode, "", new { @class = "text-danger" })
             </div>
         </div>
