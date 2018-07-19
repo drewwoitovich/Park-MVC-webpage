@@ -49,6 +49,8 @@ namespace Capstone.Web.DAL
                         p.InspirationalQuote = Convert.ToString(reader["inspirationalQuote"]);
                         p.InspirationalQuoteSource = Convert.ToString(reader["inspirationalQuoteSource"]);
                         p.ParkDescription = Convert.ToString(reader["parkDescription"]);
+                        p.NumberOfAnimalSpecies=Convert.ToInt32(reader["numberOfAnimalSpecies"]);
+                        p.EntryFee = Convert.ToInt32(reader["entryFee"]);
 
                         allParksList.Add(p);
                     }

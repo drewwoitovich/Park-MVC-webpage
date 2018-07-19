@@ -29,6 +29,7 @@ namespace Capstone.Web.Controllers
 
             return View("Index", allParks);
         }
+        // GET: /Home/ParkDetails/@parkCode
 
         // GET: ParkDetails
         public ActionResult ParkDetails(string id)
@@ -48,6 +49,7 @@ namespace Capstone.Web.Controllers
             }
             return View("ParkDetails", model);
         }
+
 
         // GET: Survey
         public ActionResult Survey()
@@ -82,6 +84,5 @@ namespace Capstone.Web.Controllers
             }
             return View("ParkDetails", model);
         }
-
     }
 }
