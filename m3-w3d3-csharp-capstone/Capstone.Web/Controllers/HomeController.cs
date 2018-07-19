@@ -26,6 +26,7 @@ namespace Capstone.Web.Controllers
 
             return View("Index", allParks);
         }
+        // GET: /Home/ParkDetails/@parkCode
 
         public ActionResult ParkDetails(string id)
         {
@@ -44,5 +45,7 @@ namespace Capstone.Web.Controllers
             }
             return View("ParkDetails", model);
         }
+
+        public ActionResult 
     }
 }
