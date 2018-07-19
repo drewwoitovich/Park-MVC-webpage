@@ -44,5 +44,11 @@ namespace Capstone.Web.Controllers
             }
             return View("ParkDetails", model);
         }
+
+        public ActionResult Survey()
+        {
+            return View("Survey");
+        }
+        
     }
 }

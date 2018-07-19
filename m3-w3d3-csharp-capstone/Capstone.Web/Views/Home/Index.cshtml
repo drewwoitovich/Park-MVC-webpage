@@ -27,7 +27,7 @@
             <div class="text-center">
                 <div class="col-lg-6">
                     <a href='@Url.Action("ParkDetails", "Home", new{id=item.ParkCode})'>
-                    <b> @Html.ActionLink(item.ParkName, "Details", new { id = item.ParkCode }, new { @style = "color: black; text-decoration: none" })</b>
+                    <b> @Html.ActionLink(item.ParkName, "ParkDetails", new { id = item.ParkCode }, new { @style = "color: black; text-decoration: none" })</b>
                     </a>
                 </div>
                 <p>@Html.DisplayFor(modelItem => item.ParkDescription)</p>
