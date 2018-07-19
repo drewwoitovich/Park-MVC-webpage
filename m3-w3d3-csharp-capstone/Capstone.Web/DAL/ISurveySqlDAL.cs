@@ -11,6 +11,6 @@ namespace Capstone.Web.DAL
     {
         List<Survey> ViewAllSurveys();
 
-        Survey InsertSurvey(string parkCode, string emailAddress, string state, string activityLevel);
+        bool InsertSurvey(Survey newSurvey);
     }
 }

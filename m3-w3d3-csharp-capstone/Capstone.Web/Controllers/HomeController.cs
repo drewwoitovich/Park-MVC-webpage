@@ -5,16 +5,19 @@ using System.Web;
 using System.Web.Mvc;
 using Capstone.Web.DAL;
 using Capstone.Web.Models;
+using System.Configuration;
 
 namespace Capstone.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private string connectionString;
+        string connectionString = ConfigurationManager.ConnectionStrings["NPGeek"].ConnectionString;
+
+        SurveySqlDAL dal;
 
         public HomeController()
         {
-            connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
+            dal = new SurveySqlDAL(connectionString);
         }
 
         // GET: Home
@@ -27,6 +30,7 @@ namespace Capstone.Web.Controllers
             return View("Index", allParks);
         }
 
+        // GET: ParkDetails
         public ActionResult ParkDetails(string id)
         {
             ParkSqlDAL dal = new ParkSqlDAL(connectionString);
@@ -45,18 +49,21 @@ namespace Capstone.Web.Controllers
             return View("ParkDetails", model);
         }
 
+        // GET: Survey
         public ActionResult Survey()
         {
-            ParkSqlDAL dal = new ParkSqlDAL(connectionString);
-
-
-
             return View("Survey");
         }
 
-        public ActionResult SurveyResults()
+        // POST: Survey
+        [HttpPost]
+        public ActionResult Survey(Survey model)
         {
-            return View("SurveyResults");
+            if (!dal.InsertSurvey(model))
+            {
+                return View("Survey", model);
+            }
+            return RedirectToAction("SurveyResults", "Home");
         }
         
     }

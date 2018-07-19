@@ -4,11 +4,9 @@
     ViewBag.Title = "SurveyResults";
 }
 
-<h2>SurveyResults</h2>
+<h2>Survey Results</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -39,11 +37,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ActivityLevel)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SurveyId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SurveyId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SurveyId })
         </td>
     </tr>
 }

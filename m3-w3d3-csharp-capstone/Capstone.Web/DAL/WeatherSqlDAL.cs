@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using Capstone.Web.Models;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Capstone.Web.DAL
 {
     public class WeatherSqlDAL : IWeatherSqDAL
     {
-        public string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
+        public string connectionString = ConfigurationManager.ConnectionStrings["NPGeek"].ConnectionString;
 
         private const string SQL_GetWeatherForPark = "SELECT * FROM weather WHERE parkCode = @parkCode";
 
