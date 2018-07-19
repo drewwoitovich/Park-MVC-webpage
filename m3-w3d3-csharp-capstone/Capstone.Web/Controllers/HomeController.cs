@@ -67,20 +67,18 @@ namespace Capstone.Web.Controllers
         }
         
         // GET: Weather
-        public ActionResult Weather()
+        public ActionResult Weather(string id)
         {
             WeatherSqlDAL dal = new WeatherSqlDAL(connectionString);
-            List<Weather> allWeatherList = dal.GetWeatherByParkCode(id);
+            List<Weather> allWeatherList = dal.GetAllWeather();
             Weather model = null;
 
-            foreach (Weather p in allWeatherList)
+            foreach (Weather w in allWeatherList)
             {
-                if (id == p.ParkCode)
+                if (id == w.ParkCode)
                 {
-                    model = p;
+                    model = w;
                 }
-
-
             }
             return View("ParkDetails", model);
         }

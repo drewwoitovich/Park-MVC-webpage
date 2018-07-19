@@ -13,6 +13,7 @@ namespace Capstone.Web.DAL
         public string connectionString = ConfigurationManager.ConnectionStrings["NPGeek"].ConnectionString;
 
         private const string SQL_GetWeatherForPark = "SELECT * FROM weather WHERE parkCode = @parkCode";
+        private const string SQL_GetAllWeather = "SELECT * FROM weather;";
 
         public WeatherSqlDAL(string databaseConnectionString)
         {
@@ -40,12 +41,45 @@ namespace Capstone.Web.DAL
                         w.Forecast = Convert.ToString(reader["forecast"]);
                         w.High = Convert.ToInt32(reader["high"]);
                         w.Low = Convert.ToInt32(reader["low"]);
-                        w.ParkCode = Convert.ToString(reader["parkCode"]);
+                        //w.ParkCode = Convert.ToString(reader["parkCode"]);
                         w.Temperature = "F";
                         fiveDayForecast.Add(w);
                     }
                 }
                 return fiveDayForecast;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<Weather> GetAllWeather()
+        {
+
+            List<Weather> allWeatherList = new List<Weather>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(SQL_GetAllWeather, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Weather w = new Weather();
+                        w.FiveDayForecastValue = Convert.ToInt32(reader["fiveDayForecastValue"]);
+                        w.Forecast = Convert.ToString(reader["forecast"]);
+                        w.High = Convert.ToInt32(reader["high"]);
+                        w.Low = Convert.ToInt32(reader["low"]);
+                        w.ParkCode = Convert.ToString(reader["parkCode"]);
+                        w.Temperature = "F";
+                        allWeatherList.Add(w);
+                    }
+                }
+                return allWeatherList;
             }
             catch (Exception e)
             {
