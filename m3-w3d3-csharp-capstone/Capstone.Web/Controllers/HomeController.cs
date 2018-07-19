@@ -47,7 +47,16 @@ namespace Capstone.Web.Controllers
 
         public ActionResult Survey()
         {
+            ParkSqlDAL dal = new ParkSqlDAL(connectionString);
+
+
+
             return View("Survey");
+        }
+
+        public ActionResult SurveyResults()
+        {
+            return View("SurveyResults");
         }
         
     }
