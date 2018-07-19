@@ -85,8 +85,8 @@ namespace Capstone.Web.Controllers
             }
 
             bool isFahrenheit;
-            Session["Temperature"] = Request.Params["Temperature"];
 
+            Session["Temperature"] = Request.Params["Temperature"];
             if (Session["Temperature"].ToString() == "F")
             {
                 isFahrenheit = true;
