@@ -88,6 +88,7 @@
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="DAL\ParkSqlDALTests.cs" />
     <Compile Include="DAL\SurveySqlDALTests.cs" />
+    <Compile Include="DAL\WeatherSqlDALTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

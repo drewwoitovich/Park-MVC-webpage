@@ -10,5 +10,6 @@ namespace Capstone.Web.DAL
     public interface IWeatherSqDAL
     {
        List<Weather> GetWeatherByParkCode(string parkCode);
+       List<Weather> GetAllWeather();
     }
 }
