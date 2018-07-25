@@ -11,7 +11,7 @@ namespace Capstone.Web.DAL
 {
     public class ParkSqlDAL : IParkSqlDAL
     {
-        public string connectionString = ConfigurationManager.ConnectionStrings["NPGeek"].ConnectionString;
+        public string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
 
         private const string SQL_GetAllParkData = "SELECT * FROM park ORDER BY state";
         private const string SQL_GetParkDataByCode = "SELECT * FROM park WHERE parkCode = @parkCode";

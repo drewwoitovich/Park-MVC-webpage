@@ -10,7 +10,7 @@ namespace Capstone.Web.DAL
 {
     public class SurveySqlDAL : ISurveySqlDAL
     {
-        public string connectionString = ConfigurationManager.ConnectionStrings["NPGeek"].ConnectionString;
+        public string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
 
         private const string SQL_InsertSurvey = "INSERT INTO [dbo].[survey_result] ([parkCode], " +
             "[emailAddress], [state], [activityLevel]) VALUES (@parkCode, @emailAddress, " +

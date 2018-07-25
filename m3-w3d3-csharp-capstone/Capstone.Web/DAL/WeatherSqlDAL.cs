@@ -10,7 +10,7 @@ namespace Capstone.Web.DAL
 {
     public class WeatherSqlDAL : IWeatherSqDAL
     {
-        public string connectionString = ConfigurationManager.ConnectionStrings["NPGeek"].ConnectionString;
+        public string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
 
         private const string SQL_GetWeatherForPark = "SELECT * FROM weather WHERE parkCode = @parkCode";
         private const string SQL_GetAllWeather = "SELECT * FROM weather;";

@@ -11,8 +11,7 @@ namespace Capstone.Web.Controllers
 {
     public class HomeController : Controller
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["NPGeek"].ConnectionString;
-
+        private string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
         SurveySqlDAL dal;
 
         public HomeController()
