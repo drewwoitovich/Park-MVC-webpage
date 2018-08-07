@@ -24,11 +24,10 @@ namespace Capstone.Web.DAL
             connectionString = databaseConnectionString;
         }
 
+        // Adds a completed survey to the survey table in the database using inputs from the web form
+        // on the Survey page
         public bool InsertSurvey(Survey newSurvey)
         {
-
-            //Survey s = new Survey();
-
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -56,6 +55,8 @@ namespace Capstone.Web.DAL
             }
         }
 
+        // Returns a list of all completed surveys in order of vote count in descending order. 
+        // Users are redirected to the completed survey page after submitting a survey
         public List<Survey> ViewAllSurveys()
         {
             List<Survey> allSurveysList = new List<Survey>();
@@ -90,6 +91,8 @@ namespace Capstone.Web.DAL
             return allSurveysList;
         }
 
+        // Determines the order of highest voted surveys in the database using a COUNT 
+        // SQL function
         public List<SurveyResults> GetHighestVoteTotal()
         {
             List<SurveyResults> surveyResultsList = new List<SurveyResults>();

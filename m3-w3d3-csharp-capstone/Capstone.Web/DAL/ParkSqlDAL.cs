@@ -20,7 +20,8 @@ namespace Capstone.Web.DAL
         {
             connectionString = databaseConnectionString;
         }
-
+        
+        // Returns a list of parks and their data to be displayed on the Home page
         public List<Park> GetAllParkData()
         {
             List<Park> allParksList = new List<Park>();
@@ -63,6 +64,7 @@ namespace Capstone.Web.DAL
             }
         }
 
+        // Return all information for a selected park to be displayed on the Details page
         public Park GetParkDataByCode(string parkCode)
         {
             Park p = new Park();

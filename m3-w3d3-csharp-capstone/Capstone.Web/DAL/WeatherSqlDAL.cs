@@ -20,6 +20,7 @@ namespace Capstone.Web.DAL
             connectionString = databaseConnectionString;
         }
 
+        // Returns a list of the 5-day weather forecast for a given park
         public List<Weather> GetWeatherByParkCode(string parkCode)
         {
 
@@ -54,6 +55,7 @@ namespace Capstone.Web.DAL
             }
         }
 
+        // Returns a list of all weather for all parks in the database
         public List<Weather> GetAllWeather()
         {
 
